@@ -87,10 +87,15 @@ REST_FRAMEWORK = {
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ),
 }
+
+SITE_NAME = "Skymarket"
+DOMAIN = "http://127.0.0.1:3000"
+
 DJOSER = {
     "LOGIN_FIELD": "email",
     "SERIALIZERS": {"user_create": "users.serializers.UserRegistrationSerializer",
                     "current_user": "users.serializers.CurrentUserSerializer"},
+    "PASSWORD_RESET_CONFIRM_URL": "password/reset/confirm/{uid}/{token}"
 
 }
 
@@ -182,3 +187,6 @@ EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 EMAIL_USE_TLS = os.getenv("EMAIL_USE_TLS", False) == "True"
 EMAIL_USE_SSL = os.getenv("EMAIL_USE_SSL", False) == "True"
+
+SERVER_EMAIL = EMAIL_HOST_USER
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
