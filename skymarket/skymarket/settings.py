@@ -88,8 +88,9 @@ REST_FRAMEWORK = {
     ),
 }
 DJOSER = {
-    "SERIALIZERS": {"user_create": "users.serializers.UserRegistrationSerializer"},
     "LOGIN_FIELD": "email",
+    "SERIALIZERS": {"user_create": "users.serializers.UserRegistrationSerializer"},
+
 }
 
 SIMPLE_JWT = {
