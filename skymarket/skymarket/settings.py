@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "users.apps.UsersConfig",
     "ads.apps.SalesConfig",
     "redoc",
+    "drf_spectacular",
 ]
 
 MIDDLEWARE = [
@@ -79,6 +80,7 @@ WSGI_APPLICATION = "skymarket.wsgi.application"
 
 # TODO здесь мы настраиваем аутентификацию и пагинацию
 REST_FRAMEWORK = {
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
 # TODO здесь мы настраиваем Djoser
 DJOSER = {
