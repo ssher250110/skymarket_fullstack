@@ -1,8 +1,12 @@
-from django.urls import include, path
+from rest_framework.routers import SimpleRouter
 
-# TODO настройка роутов для модели
+from ads.apps import SalesConfig
+from ads.views import AdViewSet, CommentViewSet
 
+app_name = SalesConfig.name
 
-urlpatterns = [
+router = SimpleRouter(trailing_slash=False)
+router.register("api/ads/", AdViewSet)
+router.register("api/ads/<int:pk>/comments/", CommentViewSet)
 
-]
+urlpatterns = router.urls
