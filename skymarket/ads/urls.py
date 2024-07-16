@@ -1,12 +1,14 @@
-from rest_framework.routers import SimpleRouter
+from django.urls import path
 
 from ads.apps import SalesConfig
-from ads.views import AdViewSet, CommentViewSet
+from ads.views import AdCreateAPIView, CommentCreateAPIView, AdUpdateAPIView, CommentUpdateAPIView
 
 app_name = SalesConfig.name
 
-router = SimpleRouter(trailing_slash=False)
-router.register("api/ads/", AdViewSet, basename="ads")
-router.register("api/ads/<int:pk>/comments/", CommentViewSet, basename="comments")
+urlpatterns = [
+    path("api/ads/", AdCreateAPIView.as_view(), name="ad-create"),
+    path("api/ads/<int:pk>/", AdUpdateAPIView.as_view(), name="ad-update"),
 
-urlpatterns = router.urls
+    path("api/ads/<int:pk>/comments/", CommentCreateAPIView.as_view(), name="comment-create"),
+    path("api/ads/<int:ad_pk>/comments/<int:pk>/", CommentUpdateAPIView.as_view(), name="comment-update")
+]

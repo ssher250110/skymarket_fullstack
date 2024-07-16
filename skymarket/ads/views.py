@@ -1,15 +1,30 @@
-from rest_framework import pagination, viewsets
+from rest_framework.generics import CreateAPIView, UpdateAPIView
+
+from ads.models import Ad, Comment
+from ads.serializers import AdDetailSerializer, CommentSerializer
 
 
-class AdPagination(pagination.PageNumberPagination):
-    pass
+class AdCreateAPIView(CreateAPIView):
+    queryset = Ad.objects.all()
+    serializer_class = AdDetailSerializer
+
+    def perform_create(self, serializer):
+        serializer.save(author=self.request.user)
 
 
-# TODO view функции. Предлагаем Вам следующую структуру - но Вы всегда можете использовать свою
-class AdViewSet(viewsets.ModelViewSet):
-    pass
+class AdUpdateAPIView(UpdateAPIView):
+    queryset = Ad.objects.all()
+    serializer_class = AdDetailSerializer
 
 
-class CommentViewSet(viewsets.ModelViewSet):
-    pass
+class CommentCreateAPIView(CreateAPIView):
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
 
+    def perform_create(self, serializer):
+        serializer.save(author=self.request.user)
+
+
+class CommentUpdateAPIView(UpdateAPIView):
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
