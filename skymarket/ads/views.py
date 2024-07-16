@@ -1,4 +1,4 @@
-from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, ListAPIView
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, ListAPIView, get_object_or_404
 
 from ads.models import Ad, Comment
 from ads.serializers import AdDetailSerializer, AdSerializer, CommentSerializer
@@ -21,7 +21,7 @@ class AdRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
     serializer_class = AdDetailSerializer
 
 
-class AdListAPIView(ListAPIView):
+class AdUserListAPIView(ListAPIView):
     serializer_class = AdSerializer
 
     def get_queryset(self):
@@ -32,7 +32,19 @@ class CommentListCreateAPIView(ListCreateAPIView):
     serializer_class = CommentSerializer
 
     def get_queryset(self):
-        return Comment.objects.filter(ad=self.request.data["ad"])
+        ad = self.kwargs.get("ad")
+        return Comment.objects.filter(ad=ad)
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
+
+
+class CommentRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
+
+    def get_queryset(self):
+        print()
+        ad = self.kwargs.get("ad")
+        pk = self.kwargs.get("pk")
+        return Comment.objects.filter(ad=ad, pk=pk)
