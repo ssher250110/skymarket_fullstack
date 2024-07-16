@@ -8,11 +8,11 @@ class AdAdmin(admin.ModelAdmin):
     list_display = ["id", "title", "description", "price", "created_at", "author"]
     search_fields = ["title"]
     list_filter = ["title", "author"]
-    ordering = ["title", "price"]
+    ordering = ["title", "price", "created_at"]
 
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
     list_display = ["id", "text", "ad", "created_at", "author"]
     list_filter = ["author"]
-    ordering = ["text", "ad"]
+    ordering = ["text", "ad", "created_at"]
