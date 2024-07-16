@@ -10,5 +10,5 @@ urlpatterns = [
     path("api/ads/<int:pk>/", AdRetrieveUpdateDestroyAPIView.as_view(), name="ad-retrieve-update-destroy"),
     path("api/ads/me/", AdListAPIView.as_view(), name="ad-list-me"),
 
-    path("api/ads/<int:ad_pk>/comments/", CommentListCreateAPIView.as_view(), name="comment-list-create")
+    path("api/ads/<int:ad>/comments/", CommentListCreateAPIView.as_view(), name="comment-list-create")
 ]

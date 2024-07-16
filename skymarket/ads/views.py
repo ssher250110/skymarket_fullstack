@@ -32,7 +32,7 @@ class CommentListCreateAPIView(ListCreateAPIView):
     serializer_class = CommentSerializer
 
     def get_queryset(self):
-        return Comment.objects.filter(ad_pk=self.request.data["ad_pk"])
+        return Comment.objects.filter(ad=self.request.data["ad"])
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
