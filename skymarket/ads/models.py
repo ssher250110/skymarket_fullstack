@@ -15,7 +15,7 @@ class Ad(models.Model):
                               help_text="Загрузите изображение")
 
     def __str__(self):
-        return f"{self.title}, {self.price}, {self.author}"
+        return self.title
 
     class Meta:
         verbose_name = "Объявление"
@@ -27,7 +27,7 @@ class Comment(models.Model):
     text = models.TextField(verbose_name="Текст отзыва", help_text="Добавьте текст отзыва")
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, **NULLABLE,
                                verbose_name="Автор отзыва", help_text="Укажите автора отзыва")
-    ad = models.ForeignKey("Ad", on_delete=models.CASCADE, verbose_name="Объявление", help_text="Укажите объявление")
+    ad_pk = models.ForeignKey("Ad", on_delete=models.CASCADE, verbose_name="Объявление", help_text="Укажите объявление")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата и время создания отзыва")
 
     def __str__(self):
