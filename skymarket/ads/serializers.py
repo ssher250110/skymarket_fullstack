@@ -3,17 +3,6 @@ from rest_framework.serializers import ModelSerializer
 from ads.models import Comment, Ad
 
 
-class CommentSerializer(ModelSerializer):
-    author_first_name = ReadOnlyField(source="author.first_name")
-    author_last_name = ReadOnlyField(source="author.last_name")
-    author_image = ImageField(source="author.image", read_only=True)
-
-    class Meta:
-        model = Comment
-        fields = ["pk", "text", "author", "created_at", "author_first_name", "author_last_name", "ad",
-                  "author_image"]
-
-
 class AdSerializer(ModelSerializer):
     class Meta:
         model = Ad
@@ -29,3 +18,14 @@ class AdDetailSerializer(ModelSerializer):
         model = Ad
         fields = ["pk", "image", "title", "price", "phone", "description", "author_first_name", "author_last_name",
                   "author"]
+
+
+class CommentSerializer(ModelSerializer):
+    author_first_name = ReadOnlyField(source="author.first_name")
+    author_last_name = ReadOnlyField(source="author.last_name")
+    author_image = ImageField(source="author.image", read_only=True)
+
+    class Meta:
+        model = Comment
+        fields = ["pk", "text", "author", "created_at", "author_first_name", "author_last_name", "ad_pk",
+                  "author_image"]
