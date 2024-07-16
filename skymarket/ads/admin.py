@@ -13,6 +13,6 @@ class AdAdmin(admin.ModelAdmin):
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ["id", "text", "ad", "created_at", "author"]
+    list_display = ["id", "text", "ad_pk", "created_at", "author"]
     list_filter = ["author"]
-    ordering = ["text", "ad"]
+    ordering = ["text", "ad_pk"]
