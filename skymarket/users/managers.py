@@ -2,6 +2,7 @@ from django.contrib.auth.models import BaseUserManager
 
 
 class UserManager(BaseUserManager):
+    """ Менеджер объекта для создания пользователя и суперпользователя"""
 
     def create_user(self, email, first_name, last_name, phone, image=None, password=None, role="user"):
         """
