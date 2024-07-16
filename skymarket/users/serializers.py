@@ -14,4 +14,4 @@ class UserRegistrationSerializer(BaseUserRegistrationSerializer):
 class CurrentUserSerializer(ModelSerializer):
     class Meta:
         model = User
-        fields = ["phone", "first_name", "last_name", "id"]
+        fields = ["phone", "first_name", "last_name", "pk"]
