@@ -1,11 +1,15 @@
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, ListAPIView, get_object_or_404
 
+from ads.filters import MyAdTitleFilter
 from ads.models import Ad, Comment
 from ads.serializers import AdDetailSerializer, AdSerializer, CommentSerializer
 
 
 class AdListCreateAPIView(ListCreateAPIView):
     queryset = Ad.objects.all()
+    filter_backends = [DjangoFilterBackend]
+    filterset_class = MyAdTitleFilter
 
     def get_serializer_class(self):
         if self.request.method == "POST":
