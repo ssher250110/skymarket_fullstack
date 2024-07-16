@@ -1,14 +1,12 @@
 from django.urls import path
 
 from ads.apps import SalesConfig
-from ads.views import AdCreateAPIView, CommentCreateAPIView, AdUpdateAPIView, CommentUpdateAPIView
+from ads.views import AdListCreateAPIView, AdRetrieveUpdateDestroyAPIView, AdListAPIView
 
 app_name = SalesConfig.name
 
 urlpatterns = [
-    path("api/ads/", AdCreateAPIView.as_view(), name="ad-create"),
-    path("api/ads/<int:pk>/", AdUpdateAPIView.as_view(), name="ad-update"),
-
-    path("api/ads/<int:pk>/comments/", CommentCreateAPIView.as_view(), name="comment-create"),
-    path("api/ads/<int:ad_pk>/comments/<int:pk>/", CommentUpdateAPIView.as_view(), name="comment-update")
+    path("api/ads/", AdListCreateAPIView.as_view(), name="ad-list-create"),
+    path("api/ads/<int:pk>/", AdRetrieveUpdateDestroyAPIView.as_view(), name="ad-retrieve-update-destroy"),
+    path("api/ads/me/", AdListAPIView.as_view(), name="ad-list-me"),
 ]
