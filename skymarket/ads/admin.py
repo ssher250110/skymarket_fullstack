@@ -14,5 +14,5 @@ class AdAdmin(admin.ModelAdmin):
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
     list_display = ["id", "text", "ad", "created_at", "author"]
-    list_filter = ["author"]
+    list_filter = ["author", "ad"]
     ordering = ["text", "ad", "created_at"]
