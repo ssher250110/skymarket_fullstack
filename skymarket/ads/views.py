@@ -1,4 +1,5 @@
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.filters import OrderingFilter
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, ListAPIView
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
 
@@ -10,7 +11,8 @@ from ads.serializers import AdDetailSerializer, AdSerializer, CommentSerializer
 
 class AdListCreateAPIView(ListCreateAPIView):
     queryset = Ad.objects.all()
-    filter_backends = [DjangoFilterBackend]
+    filter_backends = [DjangoFilterBackend, OrderingFilter]
+    ordering_fields = ["title", "price"]
     filterset_class = MyAdTitleFilter
 
     def get_serializer_class(self):
@@ -37,6 +39,8 @@ class AdRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
 class AdUserListAPIView(ListAPIView):
     serializer_class = AdSerializer
     permission_classes = [IsAdminUser | IsAuthor]
+    filter_backends = [OrderingFilter]
+    ordering_fields = ["title", "price"]
 
     def get_queryset(self):
         return Ad.objects.filter(author=self.request.user)
@@ -44,6 +48,8 @@ class AdUserListAPIView(ListAPIView):
 
 class CommentListCreateAPIView(ListCreateAPIView):
     serializer_class = CommentSerializer
+    filter_backends = [OrderingFilter]
+    ordering_fields = ["title", "created_at"]
 
     def get_queryset(self):
         ad = self.kwargs.get("ad")
