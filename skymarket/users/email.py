@@ -6,10 +6,13 @@ from djoser.conf import settings
 
 
 class PasswordResetEmail(BaseEmailMessage):
+    """ Класс для сброса пароля, через электронную почту """
+
     template_name = "email/password_reset.html"
 
     def get_context_data(self):
-        # PasswordResetEmail can be deleted
+        """ Формирование ссылки для отправки пользователю"""
+
         context = super().get_context_data()
         user = context.get("user")
         context["uid"] = utils.encode_uid(user.pk)

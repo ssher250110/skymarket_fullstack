@@ -13,12 +13,29 @@ services:
     ports:
     - "5432:5432"
 
+  skymarket:
+    build: ../skymarket/.
+    tty: true
+    ports:
+      - '8000:8000'
+    command:
+      sh -c 'python manage.py migrate
+      && python manage.py runserver 0.0.0.0:8000'
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - .:/habits
+    env_file:
+      - .env
+
   frontend:
     build: ../frontend_react/.
     volumes:
       - frontend:/app/build
     depends_on:
       - db
+      - skymarket
 
   nginx:
     image: nginx:1.19.3

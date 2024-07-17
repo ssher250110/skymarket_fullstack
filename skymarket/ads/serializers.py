@@ -4,12 +4,16 @@ from ads.models import Comment, Ad
 
 
 class AdSerializer(ModelSerializer):
+    """ Сериализатор объявления """
+
     class Meta:
         model = Ad
         fields = ["pk", "image", "title", "price", "description"]
 
 
 class AdDetailSerializer(ModelSerializer):
+    """ Сериализатор детальной информации об объявлении """
+
     phone = ReadOnlyField(source="author.phone")
     author_first_name = ReadOnlyField(source="author.first_name")
     author_last_name = ReadOnlyField(source="author.last_name")
@@ -21,6 +25,8 @@ class AdDetailSerializer(ModelSerializer):
 
 
 class CommentSerializer(ModelSerializer):
+    """ Сериализатор отзыва """
+
     author_first_name = ReadOnlyField(source="author.first_name")
     author_last_name = ReadOnlyField(source="author.last_name")
     author_image = ImageField(source="author.image", read_only=True)

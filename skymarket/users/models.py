@@ -14,9 +14,7 @@ class UserRoles(models.TextChoices):
 
 
 class User(AbstractBaseUser):
-    """
-    Модель для создания пользователя
-    """
+    """ Модель для создания пользователя """
     username = None
     email = models.EmailField(unique=True, verbose_name="Почта", help_text="Укажите электронную почту")
     first_name = models.CharField(max_length=64, verbose_name="Имя", help_text="Введите имя, макс 64 символа")
