@@ -10,25 +10,35 @@ from ads.serializers import AdDetailSerializer, AdSerializer, CommentSerializer
 
 
 class AdListCreateAPIView(ListCreateAPIView):
+    """ Создание объявления и просмотр списка объявлений """
+
     queryset = Ad.objects.all()
     filter_backends = [DjangoFilterBackend, OrderingFilter]
     ordering_fields = ["title", "price"]
     filterset_class = MyAdTitleFilter
 
     def get_serializer_class(self):
+        """ Получение сериализатора по условиям """
+
         if self.request.method == "POST":
             return AdDetailSerializer
         return AdSerializer
 
     def perform_create(self, serializer):
+        """ Добавление автора объявления """
+
         serializer.save(author=self.request.user)
 
 
 class AdRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
+    """ Просмотр, изменение и удаление одного объявления """
+
     queryset = Ad.objects.all()
     serializer_class = AdDetailSerializer
 
     def get_permissions(self):
+        """ Получение прав доступа по условиях """
+
         if self.request.method in ["PUT", "PATCH", "DELETE"]:
             self.permission_classes = [IsAdminUser | IsAuthor]
         else:
@@ -37,39 +47,54 @@ class AdRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
 
 
 class AdUserListAPIView(ListAPIView):
+    """ Просмотр пользовательского списка объявлений  """
+
     serializer_class = AdSerializer
     permission_classes = [IsAdminUser | IsAuthor]
     filter_backends = [OrderingFilter]
     ordering_fields = ["title", "price"]
 
     def get_queryset(self):
+        """ Получение набора данных по условию """
+
         return Ad.objects.filter(author=self.request.user)
 
 
 class CommentListCreateAPIView(ListCreateAPIView):
+    """ Создание отзыва и просмотр списка отзывов"""
     serializer_class = CommentSerializer
     filter_backends = [OrderingFilter]
     ordering_fields = ["title", "created_at"]
 
     def get_queryset(self):
+        """ Получение набора данных по условию """
+
         ad = self.kwargs.get("ad")
         return Comment.objects.filter(ad=ad)
 
     def perform_create(self, serializer):
+        """ Добавление автора отзыва """
+
         serializer.save(author=self.request.user)
 
 
 class CommentRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
+    """ Просмотр, изменение и удаление одного отзыва """
+
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
 
     def get_queryset(self):
+        """ Получение набора данных по условиям """
+
         print()
         ad = self.kwargs.get("ad")
         pk = self.kwargs.get("pk")
         return Comment.objects.filter(ad=ad, pk=pk)
 
     def get_permissions(self):
+        """ Получение прав доступа по условиях """
+
         if self.request.method in ["PUT", "PATCH", "DELETE"]:
             self.permission_classes = [IsAdminUser | IsAuthor]
         else:

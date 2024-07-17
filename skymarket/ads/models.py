@@ -5,6 +5,8 @@ NULLABLE = {"null": True, "blank": True}
 
 
 class Ad(models.Model):
+    """ Модель объявления """
+
     title = models.CharField(max_length=50, verbose_name="Название товара", help_text="Укажите название товара")
     description = models.TextField(**NULLABLE, verbose_name="Описание товара", help_text="Укажите описание товара")
     price = models.PositiveIntegerField(verbose_name="Цена товара", help_text="Укажите цену товара")
@@ -24,6 +26,8 @@ class Ad(models.Model):
 
 
 class Comment(models.Model):
+    """ Модель отзыва """
+
     text = models.TextField(verbose_name="Текст отзыва", help_text="Добавьте текст отзыва")
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, **NULLABLE,
                                verbose_name="Автор отзыва", help_text="Укажите автора отзыва")
