@@ -39,12 +39,21 @@
 4. Введите команду в терминале(выполнение команды осуществляется из папки проекта):
     * Для Compose V1:
     ```bash
-    docker-compose market_postgres/ up -d --build 
+    docker-compose up -d --build 
     ```
     * Для Compose V2:
     ```bash
-    docker compose market_postgres/ up -d --build 
+    docker compose up -d --build 
     ```
+
+- Команда для создания суперпользователя
+```bash
+python skymarket/manage.py createsuperuser
+```
+- Команда для загрузки фикстур(пароль для пользователей и администратора: 111)
+```bash
+python  skymarket/manage.py loadall
+```
 
 ### Автор проекта:
 
