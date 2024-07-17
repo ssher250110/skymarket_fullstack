@@ -55,6 +55,13 @@ python skymarket/manage.py createsuperuser
 python  skymarket/manage.py loadall
 ```
 
+- Пути документации
+```bash
+http://127.0.0.1:8000/api/swagger/
+```
+```bash
+http://127.0.0.1:8000/api/redoc/
+```
 ### Автор проекта:
 
 https://github.com/ssher250110
