@@ -1,8 +1,8 @@
 from django.urls import path
 
 from ads.apps import SalesConfig
-from ads.views import AdListCreateAPIView, AdRetrieveUpdateDestroyAPIView, AdUserListAPIView, CommentListCreateAPIView, \
-    CommentRetrieveUpdateDestroyAPIView
+from ads.views import (AdListCreateAPIView, AdRetrieveUpdateDestroyAPIView, AdUserListAPIView,
+                       CommentListCreateAPIView, CommentRetrieveUpdateDestroyAPIView)
 
 app_name = SalesConfig.name
 
