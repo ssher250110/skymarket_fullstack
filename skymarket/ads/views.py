@@ -87,7 +87,6 @@ class CommentRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
     def get_queryset(self):
         """ Получение набора данных по условиям """
 
-        print()
         ad = self.kwargs.get("ad")
         pk = self.kwargs.get("pk")
         return Comment.objects.filter(ad=ad, pk=pk)
