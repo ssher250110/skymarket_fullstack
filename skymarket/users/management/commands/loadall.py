@@ -6,7 +6,7 @@ from django.core.management import call_command
 
 class Command(BaseCommand):
     help = "Loads fixtures from fixtures dir"
-    fixtures_dir = "skymarket/fixtures"
+    fixtures_dir = "skymarket/fixtures"     # для контейнера просто "./fixtures"
     loaddata_command = "loaddata"
     filenames = [
         "users",
