@@ -28,6 +28,8 @@
 
 ## Инструкция для запуска проекта
 
+<details>
+<summary>Инструкция</summary>
 1. Клонируйте данный репозиторий к себе на локальную машину:
 
 ```bash
@@ -47,21 +49,29 @@
     ```
 
 - Команда для создания суперпользователя
+
 ```bash
 python skymarket/manage.py createsuperuser
 ```
+
 - Команда для загрузки фикстур(пароль для пользователей и администратора: 111)
+
 ```bash
 python  skymarket/manage.py loadall
 ```
 
 - Пути документации
+
 ```bash
 http://127.0.0.1:8000/api/swagger/
 ```
+
 ```bash
 http://127.0.0.1:8000/api/redoc/
 ```
+
+</details>
+
 ### Автор проекта:
 
 https://github.com/ssher250110
