@@ -37,7 +37,7 @@ class AdRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
     serializer_class = AdDetailSerializer
 
     def get_permissions(self):
-        """ Получение прав доступа по условиях """
+        """ Получение прав доступа по условиям """
 
         if self.request.method in ["PUT", "PATCH", "DELETE"]:
             self.permission_classes = [IsAdminUser | IsAuthor]
@@ -92,7 +92,7 @@ class CommentRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
         return Comment.objects.filter(ad=ad, pk=pk)
 
     def get_permissions(self):
-        """ Получение прав доступа по условиях """
+        """ Получение прав доступа по условиям """
 
         if self.request.method in ["PUT", "PATCH", "DELETE"]:
             self.permission_classes = [IsAdminUser | IsAuthor]
